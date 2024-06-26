@@ -89,4 +89,17 @@ function addrelationship() {
 	formatted = '<tr><th>First Entity</th><th>Relationship</th><th>Second Entity</th></tr>';
 	formatted  += out;
    containertable.innerHTML = formatted;
+   var x = document.getElementById("file").value;
+   console.log(x)
+   const csv2json = (str, delimiter = ',') => {
+	const titles = str.slice(0, str.indexOf('\n')).split(delimiter);
+  const rows = str.slice(str.indexOf('\n') + 1).split('\n');
+	return rows.map(row => {
+    const values = row.split(delimiter);
+    return titles.reduce((object, curr, i) => (object[curr] = values[i], object), {})
+  });
+};
+	let csv = x;
+	let word_array = csv2json(csv,' ');
+	console.log("testing"+word_array[0][0])
 }
