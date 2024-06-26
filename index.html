@@ -43,8 +43,16 @@
 								<p>
 				<!--<input type = "button" onclick = "changeContent()" value = "Display"> 
 				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table"><br>-->
+				<div><b>OR</b></div> <br><br>
+				<div id ="fileupload"<form action="/api" method="post" enctype="multipart/form-data">
+					<label for="file">File</label>
+					<input id="file" name="file" type="file" />
+					<button>Upload</button>
+					</form>
+				</div><br>
 				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table">
 				</p>
+
 			</div>
 			<p>***********************</p>
 			<div id="knowledgegraph" style="float: left; width: 50%">
