@@ -27,7 +27,7 @@
 		</nav>
 		<main>
 <div id="maincontent">
-	<h1>Add, Edit and View Knowledge Graph</h1>
+	<h1>Add, View and Update Knowledge Graph</h1>
 </div>
 <div id="addrelationships">
 
@@ -36,7 +36,7 @@
 		<input type="file" id="fileinput" name="test" onchange="readSingleFile(event)" />
 		<span style="color:red">We have tested till 300 entries, takes 4-5 secs to load graph</span>
 </div>
-<div><br><b>OR <br>Add one by one using below option <br>User can also use below option to append relations to uploaded list</b></div><br><br>
+<div style = "text-align:left"><br><b>OR <br>Add one by one using below option <br>User can also use below option to append relations to uploaded list</b></div><br>
 				<label for="fname">First Entity:</label>
 				<input type="text" id="firstentity" name="fentity">
 				<select name="cars" id="relationship">
@@ -50,10 +50,13 @@
 				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table">
 
 </div>
-<p>***********************</p>
+<p>*********************************************</p>
 <p><b>Right side table might display duplicate entries added by the user. <br>But graph will not duplicate the nodes/relations (1 relation appears only once)</b></p>
-<br>
-<div id="knowledgegraph" style="float: left; width: 100%">
+<span style="color:red">(Refresh to clear all data)</span>
+<div>
+	<button onclick="refresh()"><span style ="font-weight:bold">Refresh</span></button>
+</div>
+<div id="knowledgegraph" style="float: left; width: 50%">
 <div id="knowledgegraphdisplayarea">
 				</div>
 </div>	
