@@ -111,4 +111,6 @@ function readSingleFile (evt) {
 	}
 }
 
-
+function refresh(){
+	location.reload();
+}
