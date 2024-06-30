@@ -12,51 +12,15 @@ function changeContent(page) {
 	}
 }
 
-function getjson() {
-
-	var contentDiv = document.getElementById('knowledgegraph');
-	const url = 'http://127.0.0.1:5000/home/10'
-    const response = fetch(url)
-		.then((response) => {return response.json();})
-		.then((data) => 
-		{let authors = data;
-		contentDiv.innerHTML = authors.data;
-		});
-
-}
-
-
-function addrelationship() {
-
-	var fentity = document.getElementById('firstentity').value;
-	var relationship = document.getElementById('relationship').value;
-	var sentity = document.getElementById('secondentity').value;
-	console.log(fentity, relationship,sentity)
-	const input = {fen : fentity, relation: relationship, sen: sentity}
-
-		// a POST request
-	const response = fetch('http://127.0.0.1:5000/addrelationship', {
-	method: 'POST',
-	contentType: 'application/json',
-	body: JSON.stringify(input)
-	}).then((response) => response.blob())
-  .then((blob) => {
-    const imageUrl = URL.createObjectURL(blob);
-    const imageElement = document.createElement("img");
-    imageElement.src = imageUrl;
-    const container = document.getElementById("knowledgegraphdisplayarea");
-	container.innerHTML=""
-    container.appendChild(imageElement);
-  });
-
-}
-var Str_txt=[]
+let Str_txt=[]
 function addrelationship() {
 
 	var fentity = document.getElementById('firstentity').value;
 	var relationship = document.getElementById('relationship').value;
 	var sentity = document.getElementById('secondentity').value;
 	Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
+
+	console.log("STRTX"+Str_txt)
 	stringifiedlist = JSON.stringify(Str_txt);
 	console.log(Str_txt)
 			// a POST request
@@ -89,17 +53,62 @@ function addrelationship() {
 	formatted = '<tr><th>First Entity</th><th>Relationship</th><th>Second Entity</th></tr>';
 	formatted  += out;
    containertable.innerHTML = formatted;
-   var x = document.getElementById("file").value;
-   console.log(x)
-   const csv2json = (str, delimiter = ',') => {
-	const titles = str.slice(0, str.indexOf('\n')).split(delimiter);
-  const rows = str.slice(str.indexOf('\n') + 1).split('\n');
-	return rows.map(row => {
-    const values = row.split(delimiter);
-    return titles.reduce((object, curr, i) => (object[curr] = values[i], object), {})
-  });
-};
-	let csv = x;
-	let word_array = csv2json(csv,' ');
-	console.log("testing"+word_array[0][0])
+
 }
+
+
+function readSingleFile (evt) {
+
+	var f = evt.target.files[0];
+	if (f) {
+	var r = new FileReader();
+	r.onload = function(e) {
+		var contents = e.target.result;
+		var lines = contents.split("\r\n");
+		console.log(lines.length)
+		for (var i=1; i<lines.length-1; i++){
+			let text = lines[i].split(",");
+			Str_txt.push({"fentity":text[0],"relationship":text[1],"sentity":text[2]});
+		}
+	const containertable = document.getElementById("knowledgegraphtable");
+	var out=''
+	for(let items of Str_txt){
+      out += `
+	          <tr>
+            <td>${items.fentity}</td>
+            <td>${items.relationship}</td>
+            <td>${items.sentity}</td>
+         </tr>
+	      `;
+   }
+	formatted = '<tr><th>First Entity</th><th>Relationship</th><th>Second Entity</th></tr>';
+	formatted  += out;
+   	containertable.innerHTML = formatted;
+	console.log("STRT"+Str_txt.length)
+
+	stringifiedlist = JSON.stringify(Str_txt);
+	console.log(Str_txt)
+			// a POST request
+	const response = fetch('http://127.0.0.1:5000/addrelationship', {
+	method: 'POST',
+	contentType: 'application/json',
+	body: JSON.stringify(stringifiedlist)
+	}).then((response) => response.blob())
+  .then((blob) => {
+    const imageUrl = URL.createObjectURL(blob);
+    const imageElement = document.createElement("img");
+    imageElement.src = imageUrl;
+    const container = document.getElementById("knowledgegraphdisplayarea");
+	container.innerHTML=""
+    container.appendChild(imageElement);
+	  });
+
+	}
+	r.readAsText(f);
+	document.getElementById("fileinput").value=""
+	} else { 
+	alert("Failed to load file");
+	}
+}
+
+
