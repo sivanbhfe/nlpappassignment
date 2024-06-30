@@ -16,6 +16,7 @@
         <nav>
             <ul>
                 <li><a href="#" onclick="changeContent('home')">Home</a></li>
+                <li><a href="#" onclick="changeContent('edit')">Edit</a></li>
             </ul>
         </nav>
         <main>
@@ -24,29 +25,52 @@
             </div>
             <div id="addrelationships">
                 <label for="firstentity">First Entity:</label>
-                <input type="text" id="firstentity" name="fentity">
-                <select name="relationship" id="relationship">
-                    <option value="select">Select</option>
-                    <option value="manages">Manages</option>
-                    <option value="worksfor">Works for</option>
-                    <option value="colleague">is a colleague of</option>
-                </select>
+                <select id="firstentity"></select>
+                <label for="relationship">Relationship:</label>
+                <select id="relationship"></select>
                 <label for="secondentity">Second Entity:</label>
-                <input type="text" id="secondentity" name="sentity"><br><br>
+                <select id="secondentity"></select><br><br>
                 <input type="button" onclick="addrelationship()" value="Add to relationship table">
             </div>
-            <p>***********************</p>
+            <div id="editpage" style="display: none;">
+                <h2>Edit Page</h2>
+                <div class="container">
+                    <div class="column">
+                        <h3>Add People</h3>
+                        <form id="addPeopleForm">
+                            <label for="personName">Name:</label>
+                            <input type="text" id="personName" name="personName"><br><br>
+                            <label for="designation">Designation:</label>
+                            <input type="text" id="designation" name="designation"><br><br>
+                            <input type="button" onclick="addPerson()" value="Add">
+                        </form>
+                        <h3>People List</h3>
+                        <ul id="peopleList"></ul>
+                    </div>
+                    <div class="column">
+                        <h3>Add Relations</h3>
+                        <form id="addRelationsForm">
+                            <label for="relationName">Relation Name:</label>
+                            <input type="text" id="relationName" name="relationName"><br><br>
+                            <label for="relationType">Relation Type:</label>
+                            <select id="relationType" name="relationType">
+                                <option value="one-to-one">One to One</option>
+                                <option value="one-to-many">One to Many</option>
+                                <option value="many-to-one">Many to One</option>
+                                <option value="many-to-many">Many to Many</option>
+                            </select><br><br>
+                            <input type="button" onclick="addRelation()" value="Add">
+                        </form>
+                        <h3>Relations List</h3>
+                        <ul id="relationsList"></ul>
+                    </div>
+                </div>
+            </div>
             <div id="knowledgegraph" style="float: left; width: 50%">
                 <div id="knowledgegraphdisplayarea"></div>
             </div>
             <div style="float: right; width: 50%" id="knowledgegraphtablearea">
-                <table border="1" align="center" id="knowledgegraphtable">
-                    <tr>
-                        <th>First Entity</th>
-                        <th>Relationship</th>
-                        <th>Second Entity</th>
-                    </tr>
-                </table>
+                <table border="1" align="center" id="knowledgegraphtable"></table>
             </div>
         </main>
     </div>
