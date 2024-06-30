@@ -24,7 +24,8 @@ def addrelationship():
     for i in range(len(testing)):
         G.add_node(testing[i]['fentity'],name=testing[i]['fentity'])
         G.add_node(testing[i]['sentity'],name=testing[i]['sentity'])
-        G.add_edge(testing[i]['fentity'], testing[i]['sentity'], start=testing[i]['fentity'], end=testing[i]['fentity'],relation=testing[i]['fentity']+' '+testing[i]['relationship']+' '+testing[i]['sentity'])
+        # G.add_edge(testing[i]['fentity'], testing[i]['sentity'], start=testing[i]['fentity'], end=testing[i]['fentity'],relation=testing[i]['fentity']+' '+testing[i]['relationship']+' '+testing[i]['sentity'])
+        G.add_edge(testing[i]['fentity'], testing[i]['sentity'])
     pos = nx.spring_layout(G)
     nx.draw(G,pos)
     node_labels = nx.get_node_attributes(G,'name')
