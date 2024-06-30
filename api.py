@@ -20,6 +20,7 @@ def addrelationship():
     decoded = json.loads(details)
     testing = eval(decoded)
     G = nx.DiGraph()
+    print("TESTING",len(testing))
     for i in range(len(testing)):
         G.add_node(testing[i]['fentity'],name=testing[i]['fentity'])
         G.add_node(testing[i]['sentity'],name=testing[i]['sentity'])

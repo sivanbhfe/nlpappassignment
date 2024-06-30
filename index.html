@@ -26,10 +26,16 @@
 			</ul>
 		</nav>
 		<main>
-			<div id="maincontent">
-			<h1>Add, Edit and View Knowledge Graph</h1>
-			</div>
-			<div id="addrelationships">
+<div id="maincontent">
+	<h1>Add, Edit and View Knowledge Graph</h1>
+</div>
+<div id="addrelationships">
+
+
+<div id ="fileupload">
+		<input type="file" id="fileinput" name="test" onchange="readSingleFile(event)" />
+</div>
+<div><br><b>OR <br>Add one by one using below option <br>User can also use below option to append relations to uploaded list</b></div><br><br>
 				<label for="fname">First Entity:</label>
 				<input type="text" id="firstentity" name="fentity">
 				<select name="cars" id="relationship">
@@ -40,38 +46,24 @@
 				</select>
 				<label for="fname">Second Entity:</label>
 				<input type="text" id="secondentity" name="sentity"><br><br>
-								<p>
-				<!--<input type = "button" onclick = "changeContent()" value = "Display"> 
-				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table"><br>-->
-				<div><b>OR</b></div> <br><br>
-				<div id ="fileupload"<form action="/api" method="post" enctype="multipart/form-data">
-					<label for="file">File</label>
-					<input id="file" name="file" type="file" />
-					<button>Upload</button>
-					</form>
-				</div><br>
 				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table">
-				</p>
 
-			</div>
-			<p>***********************</p>
-			<div id="knowledgegraph" style="float: left; width: 50%">
-				<p>
-				<!--<input type = "button" onclick = "changeContent()" value = "Display"> 
-				<input type = "button" onclick = "kgdisplayrefresh()" value = "Display/Refresh Knowledge Graph">  
-				</p>-->
-				<div id="knowledgegraphdisplayarea">
+</div>
+<p>***********************</p>
+<p><b>Right side table might display duplicate entries added by the user. <br>But graph will not duplicate the nodes/relations (1 relation appears only once)</b></p>
+<div id="knowledgegraph" style="float: left; width: 50%">
+<div id="knowledgegraphdisplayarea">
 				</div>
-				</div>	
-				<div style="float: right; width: 50%"id="knowledgegraphtablearea">
+</div>	
+<div style="float: right; width: 50%"id="knowledgegraphtablearea">
 				<table border="1" align="center" id="knowledgegraphtable">
-
 				</table>
-				</div>
+<div id ="displayfileupload">
+</div>
+</div>
 			
-		</main>
-	</div>
-	<script src="script.js"></script>
+</main>
+</div>
+<script src="script.js"></script>
 </body>
-
 </html>
