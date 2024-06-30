@@ -2,75 +2,55 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-	<title>SPA app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>SPA app</title>
 </head>
 
 <body>
-	<div id="app">
-		<header>
-			<h1>
-				Knowledge Graph
-			</h1>
-		</header>
-		<nav>
-			<ul>
-				<li>
-					<a href="#" onclick="changeContent('home')">
-						Home
-					</a>
-				</li>
-			</ul>
-		</nav>
-		<main>
-			<div id="maincontent">
-				<h1>Add, Edit and View Knowledge Graph</h1>
-			</div>
-			<div id="addrelationships">
-				<label for="fname">First Entity:</label>
-				<input type="text" id="firstentity" name="fentity">
-				<select name="cars" id="relationship">
-					<option value="select">Select</option>
-					<option value="manages">Manages</option>
-					<option value="worksfor">Works for</option>
-					<option value="colleague">is a colleague of</option>
-				</select>
-				<label for="fname">Second Entity:</label>
-				<input type="text" id="secondentity" name="sentity"><br><br>
-				<p>
-					<!--<input type = "button" onclick = "changeContent()" value = "Display"> 
-				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table"><br>-->
-				<div><b>OR</b></div> <br><br>
-				<div id="fileupload" <form action="/api" method="post" enctype="multipart/form-data">
-					<label for="file">File</label>
-					<input id="file" name="file" type="file" />
-					<button>Upload</button>
-					</form>
-				</div><br>
-				<input type="button" onclick="addrelationship()" value="Add to relationship table">
-				</p>
-
-			</div>
-			<p>***********************</p>
-			<div id="knowledgegraph" style="float: left; width: 50%">
-				<p>
-					<!--<input type = "button" onclick = "changeContent()" value = "Display"> 
-				<input type = "button" onclick = "kgdisplayrefresh()" value = "Display/Refresh Knowledge Graph">  
-				</p>-->
-				<div id="knowledgegraphdisplayarea">
-				</div>
-			</div>
-			<div style="float: right; width: 50%" id="knowledgegraphtablearea">
-				<table border="1" align="center" id="knowledgegraphtable">
-
-				</table>
-			</div>
-
-		</main>
-	</div>
-	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <div id="app">
+        <header>
+            <h1>Knowledge Graph</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="changeContent('home')">Home</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div id="maincontent">
+                <h1>Add, Edit and View Knowledge Graph</h1>
+            </div>
+            <div id="addrelationships">
+                <label for="firstentity">First Entity:</label>
+                <input type="text" id="firstentity" name="fentity">
+                <select name="relationship" id="relationship">
+                    <option value="select">Select</option>
+                    <option value="manages">Manages</option>
+                    <option value="worksfor">Works for</option>
+                    <option value="colleague">is a colleague of</option>
+                </select>
+                <label for="secondentity">Second Entity:</label>
+                <input type="text" id="secondentity" name="sentity"><br><br>
+                <input type="button" onclick="addrelationship()" value="Add to relationship table">
+            </div>
+            <p>***********************</p>
+            <div id="knowledgegraph" style="float: left; width: 50%">
+                <div id="knowledgegraphdisplayarea"></div>
+            </div>
+            <div style="float: right; width: 50%" id="knowledgegraphtablearea">
+                <table border="1" align="center" id="knowledgegraphtable">
+                    <tr>
+                        <th>First Entity</th>
+                        <th>Relationship</th>
+                        <th>Second Entity</th>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
