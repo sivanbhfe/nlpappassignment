@@ -23,15 +23,18 @@
 						Home
 					</a>
 				</li>
+				<li>
+					<a href="#" onclick="changeContent('relations')">
+						Query Graph
+					</a>
+				</li>
 			</ul>
 		</nav>
 		<main>
 <div id="maincontent">
 	<h1>Add, View and Update Knowledge Graph</h1>
 </div>
-<div id="addrelationships">
-
-
+<div id="addrelationships" style="width: 800px; float: left;">
 <div id ="fileupload">
 		<input type="file" id="fileinput" name="test" onchange="readSingleFile(event)" />
 		<span style="color:red">We have tested till 300 entries, takes 4-5 secs to load graph</span>
@@ -42,14 +45,24 @@
 				<select name="cars" id="relationship">
 					<option value="select">Select</option>
 					<option value="manages">Manages</option>
-					<option value="worksfor">Works for</option>
-					<option value="colleague">is a colleague of</option>
+					<option value="is part of">is part of</option>
+					<option value="owns">Owns</option>
 				</select>
 				<label for="fname">Second Entity:</label>
 				<input type="text" id="secondentity" name="sentity"><br><br>
-				<input type = "button" onclick = "addrelationship()" value = "Add to relationship table">
+				<input type = "button" onclick = "addrelationship()" value = "Add OR Update relationship table">
 
 </div>
+<div style="margin-left: 620px;"><span style="font-weight:bold">Query Graph</span> 
+	<span style="color:red">(Enter a valid Node from the table to query details)</span>
+<div id ="GraphQuery">
+	<input type="text" id="entityquery" name="entityqueryname"><br><br>
+	<input type = "button" onclick = "entityquery()" value = "Query Node Details">
+<div id="queriedsubgraph"></div>
+</div>
+</div>
+
+<div >
 <p>*********************************************</p>
 <p><b>Right side table might display duplicate entries added by the user. <br>But graph will not duplicate the nodes/relations (1 relation appears only once)</b></p>
 <span style="color:red">(Refresh to clear all data)</span>
@@ -60,15 +73,15 @@
 <div id="knowledgegraphdisplayarea">
 </div>
 </div>	
-<div style="float: right; width: 50%" id="knowledgegraphtablearea">
-<table border="1" align="center" id="knowledgegraphtable">
+<!-- <div style="float: right; width: 50%" id="knowledgegraphtablearea"> -->
+	<div  id="knowledgegraphtablearea"></div>
+<table border="1" align="left" id="knowledgegraphtable">
 </table>
 <div id ="displayfileupload">
 </div>
 </div>
-			
+</div>		
 </main>
-</div>
 <script src="script.js"></script>
 </body>
 </html>
