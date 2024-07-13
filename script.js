@@ -1,11 +1,12 @@
 function changeContent(page) {
 	var maincontentDiv = document.getElementById('maincontent')
+	var universContent = document.getElementById('universe')
 	switch (page) {
 		case 'home':
-			maincontentDiv.innerHTML = '<h1>Add, Edit and View Knowledge Graph</h1>'
+			maincontentDiv.innerHTML = '<h1>Add, View and Update Knowledge Graph</h1>'
 			break;
 		case 'relations':
-			maincontentDiv.innerHTML ='<h1>Displaying Relationship Table</h1>'
+			universContent.innerHTML ='<h1>Displaying Relationship Table</h1>'
 			break;
 		default:
 			maincontentDiv.innerHTML = '<h2>Page not found!</h2>';
@@ -14,11 +15,24 @@ function changeContent(page) {
 
 let Str_txt=[]
 function addrelationship() {
-
 	var fentity = document.getElementById('firstentity').value;
 	var relationship = document.getElementById('relationship').value;
 	var sentity = document.getElementById('secondentity').value;
-	Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
+if (relationship != "select") {
+	if (Str_txt.length != 0) {
+	for (let i = 0; i < Str_txt.length; i++) {
+		if (Str_txt[i]["fentity"] == fentity && Str_txt[i]["sentity"] == sentity ){
+			Str_txt[i]["fentity"] = fentity;
+			Str_txt[i]["sentity"] = sentity;
+			Str_txt[i]["relationship"] = relationship
+		} else {
+			Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
+			break;	
+		}
+	}
+} else {
+	Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});	
+}
 
 	console.log("STRTX"+Str_txt)
 	stringifiedlist = JSON.stringify(Str_txt);
@@ -53,9 +67,31 @@ function addrelationship() {
 	formatted = '<tr><th>First Entity</th><th>Relationship</th><th>Second Entity</th></tr>';
 	formatted  += out;
    containertable.innerHTML = formatted;
-
+}	else {
+	window.alert("Please select a valid relationship");
+}
 }
 
+function entityquery() {
+
+	var entityquery = document.getElementById('entityquery').value;
+	var url = "http://127.0.0.1:5000/entityquery/"
+	var url2 = url+entityquery
+	const response1 = fetch(url2, {
+		method: 'POST',
+		contentType: 'application/json',
+		body: JSON.stringify(stringifiedlist)
+		}).then((response) => response.blob())
+  .then((blob) => {
+    const imageUrl = URL.createObjectURL(blob);
+    const imageElement = document.createElement("img");
+    imageElement.src = imageUrl;
+    const container = document.getElementById("queriedsubgraph");
+	container.innerHTML=""
+    container.appendChild(imageElement);
+	  });
+
+}
 
 function readSingleFile (evt) {
 
