@@ -23,11 +23,6 @@
 						Home
 					</a>
 				</li>
-				<li>
-					<a href="#" onclick="changeContent('relations')">
-						Query Graph
-					</a>
-				</li>
 			</ul>
 		</nav>
 		<main>
@@ -51,20 +46,21 @@
 				<label for="fname">Second Entity:</label>
 				<input type="text" id="secondentity" name="sentity"><br><br>
 				<input type = "button" onclick = "addrelationship()" value = "Add OR Update relationship table">
-
+				<p>*********************************************</p>
 </div>
+
 <div style="margin-left: 620px;"><span style="font-weight:bold">Query Graph</span> 
-	<span style="color:red">(Enter a valid Node from the table to query details)</span>
+	<br><span style="color:red">Enter a valid Node from the below table</span><br>
+	<span style="color:red">It is a directed graph implementation.</span><br></span><span style="color:red">Query fetches the edges where the given node is a Source</span>
 <div id ="GraphQuery">
 	<input type="text" id="entityquery" name="entityqueryname"><br><br>
 	<input type = "button" onclick = "entityquery()" value = "Query Node Details">
 <div id="queriedsubgraph"></div>
 </div>
 </div>
-
 <div >
 <p>*********************************************</p>
-<p><b>Right side table might display duplicate entries added by the user. <br>But graph will not duplicate the nodes/relations (1 relation appears only once)</b></p>
+<p><b>Right side table displays all relations.<br><br></b></p>
 <span style="color:red">(Refresh to clear all data)</span>
 <div>
 	<button onclick="refresh()"><span style ="font-weight:bold">Refresh</span></button>

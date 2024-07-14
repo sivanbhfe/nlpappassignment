@@ -5,9 +5,6 @@ function changeContent(page) {
 		case 'home':
 			maincontentDiv.innerHTML = '<h1>Add, View and Update Knowledge Graph</h1>'
 			break;
-		case 'relations':
-			universContent.innerHTML ='<h1>Displaying Relationship Table</h1>'
-			break;
 		default:
 			maincontentDiv.innerHTML = '<h2>Page not found!</h2>';
 	}
@@ -19,20 +16,32 @@ function addrelationship() {
 	var relationship = document.getElementById('relationship').value;
 	var sentity = document.getElementById('secondentity').value;
 if (relationship != "select") {
-	if (Str_txt.length != 0) {
+	// if (Str_txt.length != 0) {
+		const container1 = document.getElementById("queriedsubgraph");
+		container1.innerHTML=""
+		var temp = 0
 	for (let i = 0; i < Str_txt.length; i++) {
+		console.log(Str_txt[i]["fentity"])
 		if (Str_txt[i]["fentity"] == fentity && Str_txt[i]["sentity"] == sentity ){
 			Str_txt[i]["fentity"] = fentity;
 			Str_txt[i]["sentity"] = sentity;
 			Str_txt[i]["relationship"] = relationship
-		} else {
-			Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
-			break;	
-		}
+			temp = 1
+			break;
+		} 
 	}
-} else {
-	Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});	
-}
+
+	if (temp == 0) {
+			Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
+		}
+	
+	if (Str_txt.length == 0) {
+		console.log("HEEREEE")
+		Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});
+	}
+// } else {
+// 	Str_txt.push({"fentity":fentity,"relationship":relationship,"sentity":sentity});	
+// }
 
 	console.log("STRTX"+Str_txt)
 	stringifiedlist = JSON.stringify(Str_txt);

@@ -24,7 +24,7 @@ def entityquery(entity):
     details = request.data
     decoded = json.loads(details)
     testing = eval(decoded)
-    G1 = nx.Graph()
+    G1 = nx.DiGraph()
     for i in range(len(testing)):
         G1.add_node(testing[i]['fentity'], name=testing[i]['fentity'])
         G1.add_node(testing[i]['sentity'], name=testing[i]['sentity'])
@@ -32,6 +32,8 @@ def entityquery(entity):
     ed = G1.edges(entity)
     G2 = G1.edge_subgraph(ed)
     n = G2.number_of_nodes()
+    if n == 0:
+        n = 1
     print(n)
     pos = nx.spring_layout(G2, k=(8 / math.sqrt(n)))
     nx.draw(G2, pos, node_shape="s", node_size=1000)
@@ -51,7 +53,7 @@ def addrelationship():
     details = request.data
     decoded = json.loads(details)
     testing = eval(decoded)
-    G = nx.Graph()
+    G = nx.DiGraph()
     print("TESTING", len(testing))
     for i in range(len(testing)):
         G.add_node(testing[i]['fentity'], name=testing[i]['fentity'])
@@ -59,6 +61,8 @@ def addrelationship():
         # G.add_edge(testing[i]['fentity'], testing[i]['sentity'], start=testing[i]['fentity'], end=testing[i]['fentity'],relation=testing[i]['fentity']+' '+testing[i]['relationship']+' '+testing[i]['sentity'])
         G.add_edge(testing[i]['fentity'], testing[i]['sentity'])
     n = G.number_of_nodes()
+    if n == 0:
+        n = 1
     pos = nx.spring_layout(G, k=(8 / math.sqrt(n)))
     # pos = hierarchy_pos(G)
     nx.draw(G, pos, node_shape="s", node_size=1000)
